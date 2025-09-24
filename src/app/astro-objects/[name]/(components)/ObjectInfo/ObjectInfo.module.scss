@@ -1,0 +1,114 @@
+@use "@styles/variables" as *;
+@use "@styles/adaptive" as *;
+@use "@styles/mixins" as mixins;
+
+.page {
+  margin-left: 15%;
+  margin-right: 15%;
+
+  margin-bottom: $elements-margin;
+
+  &__top-container {
+    margin: $elements-margin 0;
+    display: flex;
+    position: relative;
+    height: 650px;
+
+    &__left-side {
+      display: flex;
+      flex-direction: column;
+      gap: $elements-margin-s;
+
+      flex-grow: 1.5;
+    }
+
+    &-image {
+      position: absolute;
+      right: 0;
+      width: 630px;
+      height: 630px;
+
+      flex-grow: 1;
+    }
+  }
+
+  &__description {
+    background-color: rgba(219, 216, 229, 0.6);
+    padding: $elements-margin;
+    border-radius: $border-radius;
+  }
+}
+
+.info {
+  background-color: rgba(219, 216, 229, 0.6);
+  padding: $space-xl;
+  border-radius: $border-radius;
+  z-index: 1;
+
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  column-gap: $elements-margin;
+  row-gap: $elements-margin-xs;
+}
+
+.info-container {
+  display: inline-flex;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  padding-left: $space-xl;
+  gap: $elements-margin-s;
+  margin-bottom: $elements-margin;
+}
+
+@include breakpoint(xs) {
+  .info {
+    grid-template-columns: 1fr 1.15fr;
+    column-gap: $elements-margin-s;
+  }
+  .info-key,
+  .info-value {
+    font-size: 20px;
+  }
+}
+
+@include breakpoint(l) {
+  .page {
+    margin: 5%;
+  }
+  .title {
+    text-align: center;
+    margin-bottom: $elements-margin-s;
+    padding: 0;
+  }
+  .info {
+    margin-bottom: $elements-margin-s;
+  }
+  .info-container {
+    justify-content: center;
+  }
+  .page__top-container {
+    flex-direction: column;
+    gap: $elements-margin-s;
+
+    height: 100%;
+    width: 100%;
+
+    align-items: center;
+
+    &__left-side {
+      align-items: center;
+    }
+
+    &-image {
+      position: initial;
+      object-fit: cover;
+      height: 100%;
+      width: 100%;
+
+      order: 1;
+    }
+  }
+}

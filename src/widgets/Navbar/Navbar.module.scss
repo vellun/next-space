@@ -1,0 +1,38 @@
+@use "@styles/variables" as *;
+@use "@styles/adaptive" as *;
+@use "@styles/mixins" as mixins;
+
+.navbar {
+  @include mixins.flex-center-y;
+  width: 100%;
+  justify-content: center;
+
+  margin: $elements-margin-s 0;
+
+  &__menu {
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: $elements-margin;
+    color: $text-primary;
+  }
+}
+
+@include breakpoint(xs) {
+  .navbar {
+    &__link1 {
+      order: 2;
+    }
+
+    &__logo {
+      margin-top: $elements-margin-s;
+    }
+
+    &__menu {
+      flex-direction: column;
+      gap: $elements-margin-s;
+
+      margin-bottom: $elements-margin-s;
+    }
+  }
+}

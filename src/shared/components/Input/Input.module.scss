@@ -1,0 +1,37 @@
+@use "@styles/variables" as *;
+@use "@styles/mixins" as mixins;
+
+.input {
+  @include mixins.inner-shadow;
+  border: none;
+  height: 100%;
+  width: 100%;
+  display: block;
+  padding: 14px 12px;
+  border-radius: $border-radius;
+  background-color: white;
+
+  font-size: 16px;
+
+  &:focus {
+    outline: none;
+    border: 1px solid $brand;
+  }
+
+  &:disabled {
+    background-color: white;
+  }
+
+  &__content {
+    height: 52px;
+    position: relative;
+    width: 100%;
+  }
+
+  &__icon {
+    position: absolute;
+    right: 12px;
+    bottom: 50%;
+    transform: translateY(50%);
+  }
+}

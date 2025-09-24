@@ -1,0 +1,32 @@
+@use "@styles/funcs" as funcs;
+
+$border-radius: 6px;
+
+$loader-xl: 100px;
+$loader-l: 60px;
+$loader-m: 48px;
+$loader-s: 24px;
+
+$space-xl: 24px;
+$space-l: 20px;
+$space-m: 16px;
+$space-s: 14px;
+$space-xs: 12px;
+$space-xxs: 8px;
+
+$content-margin: funcs.rem(104);
+$content-margin-l: funcs.rem(194);
+$elements-margin: funcs.rem(42);
+$elements-margin-s: funcs.rem(16);
+$elements-margin-xs: funcs.rem(12);
+
+$background: #e6e9ef;
+
+$text-primary: #26242b;
+$text-semi-primary: #6a6872;
+$text-secondary: #afadb5;
+
+$brand: #95939d;
+$brand-hover: #706d7e;
+
+$focus: #26242b;

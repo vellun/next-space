@@ -1,0 +1,41 @@
+@use "@styles/variables" as *;
+@use "@styles/mixins" as mixins;
+
+.button {
+  @include mixins.flex-center-y;
+
+  justify-content: space-between;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: $brand;
+  color: #ffff;
+  padding: $space-s $space-l;
+  transition: 0.2s;
+  border-radius: $border-radius;
+
+  &:hover {
+    background-color: $brand-hover;
+  }
+
+  &-loading {
+    &:hover {
+      background-color: $brand;
+    }
+    &-disabled:disabled {
+      background-color: $brand;
+    }
+  }
+
+  &:active {
+    background-color: $brand-hover;
+  }
+
+  &:disabled {
+    background-color: #d9d9d9;
+
+    &:hover {
+      background-color: #d9d9d9;
+    }
+  }
+}

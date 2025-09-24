@@ -1,0 +1,1 @@
+export { AllObjectsStore } from "./AllObjectsStore";

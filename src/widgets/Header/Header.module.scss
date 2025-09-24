@@ -1,0 +1,24 @@
+@use "@styles/variables" as *;
+@use "@styles/adaptive" as *;
+
+.header {
+  height: 521px;
+  width: 100%;
+  margin-bottom: $elements-margin;
+
+  &__image {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@include breakpoint(s) {
+  .header {
+    height: auto;
+
+    &__image {
+      height: auto;
+    }
+  }
+}

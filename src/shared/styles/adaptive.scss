@@ -1,0 +1,22 @@
+@use "sass:map";
+@use "@styles/funcs" as *;
+
+$breakpoints: (
+  xxs: rem(480),
+  xs: rem(540),
+  s: rem(832),
+  m: rem(876),
+  l: rem(962),
+  xl: rem(1350),
+  xxl: rem(1440),
+);
+
+@mixin breakpoint($key) {
+  @if map.has-key($breakpoints, $key) {
+    $width: map.get($breakpoints, $key);
+
+    @media (max-width: #{$width}) {
+      @content;
+    }
+  }
+}
