@@ -75,7 +75,7 @@ export const CardsSection: React.FC = observer(() => {
 
         <div ref={fetchRef}>{!isEnd && <Loader />}</div>
 
-        {isEnd && <p>That's all :)</p>}
+        {isEnd && <p>That is all :)</p>}
       </div>
     );
   }
