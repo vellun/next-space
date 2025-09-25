@@ -4,6 +4,7 @@ import type { AstroObject } from "@store/Firestore/models";
 import { Meta } from "@utils/meta";
 import type { QueryDocumentSnapshot } from "firebase/firestore";
 import { action, makeObservable, observable, runInAction } from "mobx";
+import { ObjectsApiRequestParams } from "../Firestore/types";
 
 export class AllObjectsStore extends BaseStore {
   _astroObjects: AstroObject[] = [];
@@ -32,11 +33,15 @@ export class AllObjectsStore extends BaseStore {
     this.setMeta(Meta.loading);
 
     const requestParams = this.query.getApiObjectsParams();
-    requestParams.search = requestParams.search || this.filters.inputValue as string
-    requestParams.perPage = this._perPage
-    requestParams.startAfter = this._lastVisibleDoc
 
-    const { isError, data } = await firebaseStore.getAstroObjects(requestParams);
+    const params: ObjectsApiRequestParams = {
+      ...requestParams,
+      search: requestParams.search || this.filters.inputValue as string,
+      perPage: this._perPage,
+      startAfter: this._lastVisibleDoc,
+    }
+
+    const { isError, data } = await firebaseStore.getAstroObjects(params);
 
     if (isError) {
       console.log("Error occured:", data);
@@ -49,7 +54,7 @@ export class AllObjectsStore extends BaseStore {
       const objects = data.docs.map(doc => doc.data());
       const lastVisibleDoc = data.docs[data.docs.length - 1];
 
-      this._astroObjects.push(...objects);
+      this._astroObjects.push(...objects as AstroObject[]);
       this._lastVisibleDoc = lastVisibleDoc;
       this.isEnd = objects.length < this._perPage;
     });

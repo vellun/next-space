@@ -35,7 +35,7 @@ export class ObjectStore {
 
     runInAction(() => {
       this.meta = Meta.success;
-      this._astroObject = data;
+      this._astroObject = data.data();
     });
   }
 

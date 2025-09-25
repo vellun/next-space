@@ -51,7 +51,7 @@ export class FiltersStore {
   }
 
   applySearch() {
-    this.setSearch(this.inputValue)
+    this.setSearch(this.inputValue || "")
   }
 
   get search() {

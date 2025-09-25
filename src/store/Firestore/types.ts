@@ -1,8 +1,8 @@
-import type { QueryStartAtConstraint } from "firebase/firestore";
+import type { QueryDocumentSnapshot } from "firebase/firestore";
 
 export type ObjectsApiRequestParams = {
   search: string | null;
   category: string | null;
   perPage: number | null;
-  startAfter: QueryStartAtConstraint
+  startAfter: QueryDocumentSnapshot | null;
 };

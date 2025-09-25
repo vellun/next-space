@@ -5,6 +5,7 @@ import { FirebaseError } from "firebase/app";
 import {
   collection,
   doc,
+  DocumentData,
   DocumentSnapshot,
   getDocFromCache,
   getDocFromServer,
@@ -71,7 +72,7 @@ class Firestore {
     return querySnapshot
   }
 
-  async getAstroObjects(params: ObjectsApiRequestParams): Promise<ApiResp<QuerySnapshot<AstroObject>>> {
+  async getAstroObjects(params: ObjectsApiRequestParams): Promise<ApiResp<QuerySnapshot<DocumentData, DocumentData>>> {
     try {
       const objects = await this._getObjectsSnapshot("server", params);
       return { isError: false, data: objects };
@@ -86,16 +87,16 @@ class Firestore {
     }
   }
 
-  async getAstroObject(objectName: string): Promise<ApiResp<AstroObject>> {
+  async getAstroObject(objectName: string): Promise<ApiResp<DocumentData>> {
     try {
       const objectSnap = await this._getObjectSnapshot("server", objectName);
       
-      return { isError: false, data: objectSnap.data() };
+      return { isError: false, data: objectSnap };
     } catch (e) {
       if (e instanceof FirebaseError && e.code === "unavailable") {
         const snapshot = await this._getObjectSnapshot("cache", objectName);
         if (!snapshot.exists()) {
-          return { isError: false, data: snapshot.data() };
+          return { isError: false, data: snapshot };
         }
       }
       return { isError: true, data: e };
