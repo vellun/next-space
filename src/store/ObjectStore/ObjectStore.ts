@@ -22,7 +22,6 @@ export class ObjectStore {
   }
 
   async fetch(objectName: string): Promise<void> {
-    console.log("INIT STORE")
     runInAction(() => {
       this.meta = Meta.loading;
       this._astroObject = null;
@@ -38,7 +37,6 @@ export class ObjectStore {
       this.meta = Meta.success;
       this._astroObject = data;
     });
-    console.log("STORE WAS INITED", this._astroObject)
   }
 
   get object(): AstroObject | null {

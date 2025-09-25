@@ -30,16 +30,21 @@ export class FavoritesStore {
   };
 
   private _saveToStorage(ids: string[]) {
-    localStorage.setItem(KEY, JSON.stringify(ids));
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(KEY, JSON.stringify(ids));
+    }
   }
 
   private _loadFromStorage() {
-    const storedFavorites = localStorage.getItem(KEY);
+    if (typeof window !== 'undefined') {
+      const storedFavorites = localStorage.getItem(KEY);
+
       if (storedFavorites) {
         const ids = JSON.parse(storedFavorites);
         runInAction(() => {
           this.favoriteIds = Array.isArray(ids) ? ids : [];
         });
       }
+    }
   }
 }

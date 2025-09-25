@@ -1,0 +1,24 @@
+@use "@styles/variables" as *;
+@use "@styles/adaptive" as *;
+
+.section {
+  display: grid;
+  grid-template-columns: repeat(3, 360px);
+  gap: $elements-margin;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+@include breakpoint(xl) {
+  .section {
+    grid-template-columns: repeat(2, 360px);
+    justify-content: center;
+  }
+}
+
+@include breakpoint(m) {
+  .section {
+    grid-template-columns: 360px;
+    justify-content: center;
+  }
+}

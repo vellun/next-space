@@ -1,0 +1,36 @@
+@use "@styles/variables" as *;
+@use "@styles/mixins" as mixins;
+@use "@styles/adaptive" as *;
+
+.page {
+  position: relative;
+
+  margin-left: 7%;
+  margin-right: 7%;
+
+  &__filters-section {
+    @include mixins.flex-center-y;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: -6px;
+    margin-bottom: $elements-margin;
+
+    height: 140px;
+  }
+
+  &__line {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__filters {
+    position: absolute;
+  }
+}
+
+@include breakpoint(xxl) {
+  .page__line {
+    display: none;
+  }
+}

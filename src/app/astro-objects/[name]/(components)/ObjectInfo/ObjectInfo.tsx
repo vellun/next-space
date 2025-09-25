@@ -7,13 +7,11 @@ import { Loader } from "@components/Loader";
 import { observer } from "mobx-react-lite";
 import React from "react";
 import { useObjectPageStore } from "../../(context)";
+import Image from "next/image";
 import styles from "./ObjectInfo.module.scss";
 
 const ObjectInfo = () => {
-  console.log("INIT INFO PAGE")
   const store = useObjectPageStore();
-  console.log("INIT INFO STORE", store)
-
 
   if (store === undefined) {
     return;
@@ -36,10 +34,12 @@ const ObjectInfo = () => {
   return (
     <div className={styles.page}>
       <div className={styles["page__top-container"]}>
-        <img
+        <Image
           className={styles["page__top-container-image"]}
           src={object.imageDetailPath}
           alt="Planet image"
+          width={630}
+          height={630}
         />
         <div className={styles["page__top-container__left-side"]}>
           <div className={styles.title}>

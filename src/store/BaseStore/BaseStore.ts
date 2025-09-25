@@ -37,12 +37,16 @@ export abstract class BaseStore {
     reaction(
       () => ({
         filter: this.query.getParam("filter"),
+        search: this.query.getParam("search"),
       }),
-      ({ filter }, { filter: previousFilter }) => {
-        if (this._isInitialized && filter !== previousFilter) {
-          this.fetch();
-        }
+      (current, previous) => {
+      if (
+        this._isInitialized &&
+        (current.filter !== previous.filter || current.search !== previous.search)
+      ) {
+        this.fetch();
       }
+    },
     );
   }
 

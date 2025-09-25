@@ -16,7 +16,6 @@ export const ObjectProvider = ({
   objectName: string;
   children: React.ReactNode;
 }) => {
-  console.log("INIT PROVIDER")
   const store = new ObjectStore();
   store.init(objectName);
   return <ObjectContext.Provider value={{ store }}>{children}</ObjectContext.Provider>;
@@ -24,6 +23,5 @@ export const ObjectProvider = ({
 
 export const useObjectPageStore = () => {
   const objectContext = useContext(ObjectContext);
-  console.log("INIT CONTEXT", objectContext)
   return objectContext?.store;
 };

@@ -1,11 +1,11 @@
 import { makeAutoObservable } from "mobx";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import qs from "qs";
-import type { NavigateFunction } from "react-router-dom";
 
 export class QueryParamsStore {
   private _params: qs.ParsedQs = {};
   private _search = "";
-  private _navigate: NavigateFunction | null = null;
+  private _router: AppRouterInstance | null = null;
 
   constructor() {
     makeAutoObservable<QueryParamsStore>(this);
@@ -20,24 +20,27 @@ export class QueryParamsStore {
   }
 
   setSearch(search: string) {
-    search = search.startsWith("?") ? search.slice(1) : search;
-
     if (this._search !== search) {
       this._search = search;
       this._params = qs.parse(search);
     }
   }
 
-  setNavigate(navigate: NavigateFunction) {
-    this._navigate = navigate;
+  setNavigate(router: AppRouterInstance) {
+    this._router = router;
   }
 
   get navigate() {
-    return this._navigate;
+    return this._router;
   }
 
   updateQueryParams = (params: Record<string, string | number | null | number[]>) => {
-    const searchParams = new URLSearchParams(window.location.hash.split("?")[1] || "");
+    if (!this._router) {
+      return
+    }
+
+    const searchParams = new URLSearchParams(window.location.search.split("?")[1] || "");
+
     Object.keys(params).forEach((key) => {
       const value = params[key];
       if (value !== "" && value !== null) {
@@ -46,10 +49,11 @@ export class QueryParamsStore {
         searchParams.delete(key);
       }
     });
-    if (this._navigate) {
-      this._navigate(`?${searchParams.toString()}`, { replace: true });
-    }
-  };
+
+    const url = `${window.location.pathname}${`?${searchParams.toString()}`}`;
+
+    this._router.replace(url, {scroll: false})
+  }
 
   getApiObjectsParams() {
     return {

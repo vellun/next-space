@@ -1,15 +1,18 @@
+import type { QueryParamsStore } from "@store/RootStore/QueryParamsStore";
 import { makeAutoObservable, reaction } from "mobx";
-import type { QueryParamsStore } from "store/RootStore/QueryParamsStore";
 
 export class FiltersStore {
   private _queryStore: QueryParamsStore;
   private _filter: string;
   private _search: string;
 
+  inputValue: string | null = "";
+
   constructor(queryStore: QueryParamsStore) {
     this._queryStore = queryStore;
     this._filter = "";
     this._search = "";
+    this.inputValue = "";
 
     makeAutoObservable(this);
 
@@ -20,10 +23,10 @@ export class FiltersStore {
       }),
       ({ filter, search }) => {
         if (filter !== undefined) {
-          this._filter = filter;
+          this._filter = filter as string;
         }
         if (search !== undefined) {
-          this._search = search;
+          this._search = search as string;
         }
       }
     );
@@ -41,6 +44,14 @@ export class FiltersStore {
       this._search = newSearch;
       this._queryStore.updateQueryParams({ search: newSearch });
     }
+  }
+
+  setInputValue(newSearch: string) {
+    this.inputValue = newSearch;
+  }
+
+  applySearch() {
+    this.setSearch(this.inputValue)
   }
 
   get search() {
