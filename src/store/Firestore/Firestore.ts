@@ -20,7 +20,6 @@ import {
 } from "firebase/firestore";
 
 import { astroObjectConverter } from "./converters";
-import type { AstroObject } from "./models";
 
 class Firestore {
   private async _getObjectsSnapshot(

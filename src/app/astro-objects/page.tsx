@@ -1,4 +1,4 @@
-"use client" // Убрать вмете с кнопкой для обновления бд
+"use client" // TODO: Убрать вмете с кнопкой для обновления бд
 
 import { Header } from "@/widgets/Header";
 import Image from "next/image";
@@ -6,11 +6,13 @@ import { CardsSection } from "./(components)/CardsSection";
 import { FiltersSection } from "./(components)/FiltersSection";
 import { ObjectsProvider } from "./(context)";
 
-import styles from "./page.module.scss";
-import { saveAstroObjects } from "@/utils/addFirestoreData";
 import { Button } from "@/shared/components/Button";
+import { Loader } from "@/shared/components/Loader";
+import { saveAstroObjects } from "@/utils/addFirestoreData";
+import { Suspense } from "react";
+import styles from "./page.module.scss";
 
-export default function AllObjectsContentPage() {
+function AllObjectsContentPage() {
   const UpdateDB = () => {
     saveAstroObjects()
   }
@@ -34,3 +36,11 @@ export default function AllObjectsContentPage() {
     </div>
   );
 };
+
+export default function AllObjectsPage() {
+  return (
+    <Suspense fallback={<Loader />}>
+      <AllObjectsContentPage />
+    </Suspense>
+  );
+}
