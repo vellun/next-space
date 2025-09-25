@@ -1,9 +1,9 @@
+import { BaseStore } from "@store/BaseStore";
+import { firebaseStore } from "@store/Firestore";
+import type { AstroObject } from "@store/Firestore/models";
+import { Meta } from "@utils/meta";
 import type { QueryDocumentSnapshot } from "firebase/firestore";
 import { action, makeObservable, observable, runInAction } from "mobx";
-import { BaseStore } from "store/BaseStore";
-import { firebaseStore } from "store/Firestore";
-import type { AstroObject } from "store/Firestore/models";
-import { Meta } from "utils/meta";
 
 export class AllObjectsStore extends BaseStore {
   _astroObjects: AstroObject[] = [];
@@ -32,10 +32,9 @@ export class AllObjectsStore extends BaseStore {
     this.setMeta(Meta.loading);
 
     const requestParams = this.query.getApiObjectsParams();
+    requestParams.search = requestParams.search || this.filters.inputValue as string
     requestParams.perPage = this._perPage
     requestParams.startAfter = this._lastVisibleDoc
-
-    console.log(requestParams)
 
     const { isError, data } = await firebaseStore.getAstroObjects(requestParams);
 
@@ -62,6 +61,7 @@ export class AllObjectsStore extends BaseStore {
     this.isEnd = false;
     this.isNextPageLoading = false;
     this.setMeta(Meta.initial);
+    this.filters.inputValue = null;
   }
 
   get objects(): AstroObject[] {

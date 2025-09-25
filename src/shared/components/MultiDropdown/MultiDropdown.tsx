@@ -1,3 +1,5 @@
+"use client"
+
 import classNames from "classnames";
 import { ArrowDownIcon } from "@components/icons/ArrowDownIcon";
 import React, { useEffect, useRef, useState } from "react";

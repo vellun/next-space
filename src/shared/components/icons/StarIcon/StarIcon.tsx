@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Icon, type IconProps } from "@components/icons/Icon";
-import styles from "./../Icons.module.scss";
+import styles from "@components/icons/icons.module.scss";
 
 export const StarIcon: React.FC<IconProps> = ({ color = "accent", ...props }) => (
   <Icon viewBox="0 0 16 16" {...props}>

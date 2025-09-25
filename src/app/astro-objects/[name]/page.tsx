@@ -6,7 +6,6 @@ type Props = {
 };
 
 export default async function ObjectDetailPage({ params }: Props) {
-  console.log("INIT PAGE")
   const { name } = await params
 
   return (

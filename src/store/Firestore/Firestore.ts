@@ -30,7 +30,7 @@ class Firestore {
 
     const constraints: QueryConstraint[] = []
     let objectsOuery = query(objectsRef)
-    if (params.search !== undefined) {
+    if (params.search) {
       constraints.push(where("name", "==", params.search))
       // Птом поиск лучше сделаю
       // constraints.push(where('name', '>=', params.search), where('name', '<=', params.search + '\uf8ff'))

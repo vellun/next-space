@@ -2,6 +2,8 @@ import cn from "classnames";
 import { Text } from "@components/Text";
 import React from "react";
 
+import Image from "next/image";
+
 import styles from "./Card.module.scss";
 
 export type CardProps = {
@@ -61,7 +63,7 @@ export const Card: React.FC<CardProps> = ({
           )}</div>
           {captionButton}
         </div>
-        <img className={styles.card__image} src={image} alt="Card image" />
+        <Image className={styles.card__image} width={310} height={275} src={image} alt="Card image" />
 
         <Text weight="normal" view="p-18" color="primary" maxLines={3}>
           {subtitle}
