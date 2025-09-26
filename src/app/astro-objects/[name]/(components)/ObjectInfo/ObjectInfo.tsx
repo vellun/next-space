@@ -9,6 +9,7 @@ import React from "react";
 import { useObjectPageStore } from "../../(context)";
 import Image from "next/image";
 import styles from "./ObjectInfo.module.scss";
+import { notFound } from "next/navigation";
 
 const ObjectInfo = () => {
   const store = useObjectPageStore();
@@ -28,7 +29,7 @@ const ObjectInfo = () => {
   const object = store.object;
 
   if (!object) {
-    return <div>Asto object not found</div>;
+    notFound()
   }
 
   return (
