@@ -1,15 +1,21 @@
 "use client"
 
-import { astroObjectsCategories } from "@/config";
-import { Button } from "@/shared/components/Button";
-import { Input } from "@/shared/components/Input";
+import { useCallback } from "react";
+
 import { MultiDropdown, type Option } from "@components/MultiDropdown";
 import cn from "classnames";
 import { observer } from "mobx-react-lite";
-import { useCallback } from "react";
-import { useAllObjectsPageStore } from "../../(context)";
-import styles from "./FiltersSection.module.scss";
 import Image from "next/image";
+
+import { astroObjectsCategories } from "@/config";
+import { Button } from "@/shared/components/Button";
+import { Input } from "@/shared/components/Input";
+
+
+import { useAllObjectsPageStore } from "../../(context)";
+
+import styles from "./FiltersSection.module.scss";
+
 
 type FiltersProps = {
   className?: string;

@@ -1,7 +1,7 @@
 import cn from "classnames";
+import Image from "next/image";
 
 import styles from "./Header.module.scss";
-import Image from "next/image";
 
 type HeaderProps = {
   className?: string;

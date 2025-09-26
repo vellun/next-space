@@ -1,7 +1,7 @@
-import { action, makeObservable, observable, reaction, runInAction, when } from "mobx";
 import { FiltersStore } from "@store/FiltersStore";
 import { QueryParamsStore } from "@store/RootStore/QueryParamsStore";
 import { Meta } from "@utils/meta";
+import { action, makeObservable, observable, reaction, runInAction, when } from "mobx";
 
 export abstract class BaseStore {
   query: QueryParamsStore;

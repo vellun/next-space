@@ -23,6 +23,7 @@
       }
 
       &__item {
+        width: 100%;
         @include mixins.flex-center-y;
 
         padding: 14px 12px;

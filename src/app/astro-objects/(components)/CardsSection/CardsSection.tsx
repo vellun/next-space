@@ -1,18 +1,19 @@
 "use client"
 
-import { routesConfig } from "@/config";
 import { StarFillIcon } from "@components/icons/StarFillIcon";
 import { StarIcon } from "@components/icons/StarIcon";
-
 import { favoritesStore } from "@store/RootStore/FavoritesStore";
 import { Meta } from "@utils/meta";
 import { observer } from "mobx-react-lite";
+import Link from "next/link";
 
+import { routesConfig } from "@/config";
 import { Card } from "@/shared/components/Card";
 import { Loader } from "@/shared/components/Loader";
-import Link from "next/link";
+
 import { useAllObjectsPageStore } from "../../(context)";
 import { useInfiniteScroll } from "../../(hooks)/useInfiniteScroll";
+
 import styles from "./CardsSection.module.scss";
 
 export const CardsSection: React.FC = observer(() => {
@@ -60,13 +61,13 @@ export const CardsSection: React.FC = observer(() => {
                 subtitle={object.description}
                 image={object.imagePath}
                 captionButton={
-                  <div onClick={handleFavoriteClick}>
+                  <button className={styles["fav-button"]} onClick={handleFavoriteClick}>
                     {isFavorite ? (
                       <StarFillIcon width="20" height="20" />
                     ) : (
                       <StarIcon width="20" height="20" />
                     )}
-                  </div>
+                  </button>
                 }
               />
             </Link>

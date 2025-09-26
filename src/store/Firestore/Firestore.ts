@@ -2,19 +2,20 @@ import { db } from "@config/firebase";
 import type { ObjectsApiRequestParams } from "@store/Firestore/types";
 import { type ApiResp } from "@utils/apiTypes";
 import { FirebaseError } from "firebase/app";
+import type {
+  DocumentData,
+  DocumentSnapshot,
+  QueryConstraint,
+  QuerySnapshot} from "firebase/firestore";
 import {
   collection,
   doc,
-  DocumentData,
-  DocumentSnapshot,
   getDocFromCache,
   getDocFromServer,
   getDocsFromCache,
   getDocsFromServer,
   limit,
   query,
-  QueryConstraint,
-  QuerySnapshot,
   startAfter,
   where
 } from "firebase/firestore";

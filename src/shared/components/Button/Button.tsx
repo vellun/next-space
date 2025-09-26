@@ -1,6 +1,7 @@
+import React from "react";
+
 import { Loader } from "@components/Loader";
 import cn from "classnames";
-import React from "react";
 
 import styles from "./Button.module.scss";
 

@@ -1,10 +1,10 @@
 "use client"
 
-import classNames from "classnames";
-import { ArrowDownIcon } from "@components/icons/ArrowDownIcon";
 import React, { useEffect, useRef, useState } from "react";
 
 import {Text} from "@components/Text"
+import { ArrowDownIcon } from "@components/icons/ArrowDownIcon";
+import classNames from "classnames";
 
 import { Input } from "../Input";
 
@@ -58,11 +58,20 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = (props: MultiDropdown
 
   const items = options
     .filter((option) => {
-      if (search === null) return true;
       return option.value.toLocaleLowerCase().startsWith(search.toLocaleLowerCase());
     })
     .map((option) => {
       const isSelected = value.map((v) => v.key).includes(option.key);
+
+      const handleMenuClick = (e: React.MouseEvent | React.KeyboardEvent) => {
+          e.stopPropagation();
+          if (isSelected) {
+            onChange(value.filter((v) => v.key !== option.key));
+          } else {
+            onChange([...value, option]);
+          }
+          setIsOpen(false);
+        }
 
       return (
         <div
@@ -70,15 +79,15 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = (props: MultiDropdown
             styles["dropdown__category-menu__item"],
             isSelected && styles["dropdown__category-menu__item_selected"]
           )}
-          onClick={() => {
-            if (isSelected) {
-              onChange(value.filter((v) => v.key !== option.key));
-            } else {
-              onChange([...value, option]);
-            }
-            setIsOpen(false);
-          }}
+          onClick={handleMenuClick}
           key={option.key}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              handleMenuClick(e);
+            }
+          }}
         >
           <Text className={styles["dropdown__category-menu__item-text"]} view="p-18" tag="div">{option.value}</Text>
         </div>

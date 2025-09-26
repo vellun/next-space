@@ -1,7 +1,7 @@
-import cn from "classnames";
-import { Text } from "@components/Text";
 import React from "react";
 
+import { Text } from "@components/Text";
+import cn from "classnames";
 import Image from "next/image";
 
 import styles from "./Card.module.scss";
@@ -32,12 +32,11 @@ export const Card: React.FC<CardProps> = ({
   title,
   subtitle,
   contentSlot,
-  onClick,
   actionSlot,
   captionButton,
 }: CardProps) => {
   return (
-    <div className={cn(styles.card, className)} onClick={onClick}>
+    <div className={cn(styles.card, className)}>
       <div className={styles.card__body}>
         <div className={styles.card__caption}>
           <div className={styles["card__caption-title"]}>

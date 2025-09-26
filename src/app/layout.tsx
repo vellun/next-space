@@ -1,7 +1,10 @@
+import type { Metadata } from "next";
+
 import { roboto } from "@/shared/fonts";
 import { Container } from "@/widgets/Container";
+
 import "@styles/styles.scss";
-import type { Metadata } from "next";
+
 
 export const metadata: Metadata = {
   title: "Space",

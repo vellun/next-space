@@ -1,7 +1,9 @@
 import { db } from "@config/firebase";
 import { doc, setDoc } from "firebase/firestore";
 
-import { AstroObject, AstroObjectCategory } from "@/store/Firestore/models";
+import type { AstroObjectCategory } from "@/store/Firestore/models";
+import { AstroObject } from "@/store/Firestore/models";
+
 import { astroObjectConverter } from "../store/Firestore/converters";
 
 const objects = [

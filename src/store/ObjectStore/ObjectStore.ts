@@ -1,7 +1,7 @@
-import { action, makeObservable, observable, runInAction } from "mobx";
 import { firebaseStore } from "@store/Firestore";
 import type { AstroObject } from "@store/Firestore/models";
 import { Meta } from "@utils/meta";
+import { action, makeObservable, observable, runInAction } from "mobx";
 
 export class ObjectStore {
   _astroObject: AstroObject | null = null;

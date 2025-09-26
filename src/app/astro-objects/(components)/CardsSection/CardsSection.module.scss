@@ -9,6 +9,13 @@
   margin-bottom: 40px;
 }
 
+.fav-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
 @include breakpoint(xl) {
   .section {
     grid-template-columns: repeat(2, 360px);

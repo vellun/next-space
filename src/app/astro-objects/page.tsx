@@ -1,15 +1,17 @@
 "use client" // TODO: Убрать вмете с кнопкой для обновления бд
 
-import { Header } from "@/widgets/Header";
+import { Suspense } from "react";
+
 import Image from "next/image";
-import { CardsSection } from "./(components)/CardsSection";
-import { FiltersSection } from "./(components)/FiltersSection";
-import { ObjectsProvider } from "./(context)";
 
 import { Button } from "@/shared/components/Button";
 import { Loader } from "@/shared/components/Loader";
 import { saveAstroObjects } from "@/utils/addFirestoreData";
-import { Suspense } from "react";
+import { Header } from "@/widgets/Header";
+
+import { CardsSection } from "./(components)/CardsSection";
+import { FiltersSection } from "./(components)/FiltersSection";
+import { ObjectsProvider } from "./(context)";
 import styles from "./page.module.scss";
 
 function AllObjectsContentPage() {

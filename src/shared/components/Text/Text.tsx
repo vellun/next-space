@@ -1,7 +1,8 @@
 "use client"
 
-import cn from "classnames";
 import * as React from "react";
+
+import cn from "classnames";
 
 import styles from "./Text.module.scss";
 

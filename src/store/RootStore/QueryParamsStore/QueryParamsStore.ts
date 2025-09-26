@@ -1,5 +1,5 @@
 import { makeAutoObservable } from "mobx";
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+import type { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import qs from "qs";
 
 export class QueryParamsStore {

@@ -1,15 +1,18 @@
 "use client"
 
-import { Text } from "@components/Text";
-import { Meta } from "@utils/meta";
+import React from "react";
 
 import { Loader } from "@components/Loader";
+import { Text } from "@components/Text";
+import { Meta } from "@utils/meta";
 import { observer } from "mobx-react-lite";
-import React from "react";
-import { useObjectPageStore } from "../../(context)";
 import Image from "next/image";
-import styles from "./ObjectInfo.module.scss";
 import { notFound } from "next/navigation";
+
+import { useObjectPageStore } from "../../(context)";
+
+import styles from "./ObjectInfo.module.scss";
+
 
 const ObjectInfo = () => {
   const store = useObjectPageStore();

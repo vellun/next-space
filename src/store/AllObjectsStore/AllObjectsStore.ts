@@ -4,7 +4,8 @@ import type { AstroObject } from "@store/Firestore/models";
 import { Meta } from "@utils/meta";
 import type { QueryDocumentSnapshot } from "firebase/firestore";
 import { action, makeObservable, observable, runInAction } from "mobx";
-import { ObjectsApiRequestParams } from "../Firestore/types";
+
+import type { ObjectsApiRequestParams } from "../Firestore/types";
 
 export class AllObjectsStore extends BaseStore {
   _astroObjects: AstroObject[] = [];
@@ -44,7 +45,6 @@ export class AllObjectsStore extends BaseStore {
     const { isError, data } = await firebaseStore.getAstroObjects(params);
 
     if (isError) {
-      console.log("Error occured:", data);
       this.setMeta(Meta.error);
       return;
     }

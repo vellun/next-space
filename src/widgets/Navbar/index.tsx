@@ -1,9 +1,10 @@
 import { Text } from "@components/Text";
 import cn from "classnames";
-
-import Link from "next/link";
-import styles from "./Navbar.module.scss";
 import Image from "next/image";
+import Link from "next/link";
+
+import styles from "./Navbar.module.scss";
+
 
 type NavbarProps = {
   className?: string;

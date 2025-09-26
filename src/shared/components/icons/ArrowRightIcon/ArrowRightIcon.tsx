@@ -1,5 +1,4 @@
 import { Icon, type IconProps } from "@components/icons/Icon";
-
 import styles from "@components/icons/icons.module.scss";
 
 export const ArrowRightIcon: React.FC<IconProps> = ({ color = "primary", ...props }) => (
