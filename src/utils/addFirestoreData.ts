@@ -238,7 +238,7 @@ export async function saveAstroObjects(): Promise<void> {
       object.imageDetailPath,
       object.info,
     );
-    const objectRef = doc(db, "objects", newObject.name).withConverter(astroObjectConverter);
+    const objectRef = doc(db, "objects", newObject.slug).withConverter(astroObjectConverter);
     await setDoc(objectRef, newObject);
   }
 }

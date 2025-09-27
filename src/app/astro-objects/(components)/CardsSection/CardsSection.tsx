@@ -54,7 +54,7 @@ export const CardsSection: React.FC = observer(() => {
           };
 
           return (
-            <Link href={routesConfig.astroObjectDetail.create(object.name)} key={object.name}>
+            <Link href={routesConfig.astroObjectDetail.create(object.slug)} key={object.slug}>
               <Card
                 title={object.name}
                 captionSlot={object.category}
