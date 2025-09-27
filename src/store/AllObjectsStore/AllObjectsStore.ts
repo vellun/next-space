@@ -55,6 +55,7 @@ export class AllObjectsStore extends BaseStore {
       const lastVisibleDoc = data.docs[data.docs.length - 1];
 
       this._astroObjects.push(...objects as AstroObject[]);
+      console.log("OBJECTS", this._astroObjects)
       this._lastVisibleDoc = lastVisibleDoc;
       this.isEnd = objects.length < this._perPage;
     });

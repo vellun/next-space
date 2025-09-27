@@ -11,6 +11,7 @@ export const astroObjectConverter: FirestoreDataConverter<AstroObject> = {
   toFirestore: (object: AstroObject): DocumentData => {
     return {
       name: object.name,
+      slug: object.slug,
       category: object.category,
       description: object.description,
       imagePath: object.imagePath,
@@ -22,6 +23,7 @@ export const astroObjectConverter: FirestoreDataConverter<AstroObject> = {
     const data = snapshot.data(options);
     return new AstroObject(
       data.name,
+      data.slug,
       data.category,
       data.description,
       data.imagePath,
