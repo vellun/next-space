@@ -10,7 +10,7 @@ import Image from "next/image";
 import { astroObjectsCategories } from "@/config";
 import { Button } from "@/shared/components/Button";
 import { Input } from "@/shared/components/Input";
-
+import { CloseIcon } from "@/shared/components/icons/CloseIcon";
 
 import { useAllObjectsPageStore } from "../../(context)";
 
@@ -32,8 +32,12 @@ export const FiltersSection: React.FC<FiltersProps> = observer(({ className }) =
     store.filters.setInputValue(value);
   };
 
-  const handleButtonClick = () => {
+  const handleSearchButtonClick = () => {
     store.filters.applySearch(); 
+  };
+
+  const handleResetButtonClick = () => {
+    store.filters.resetSearch(); 
   };
 
   const handleSelect = (selectedOptions: Option[]) => {
@@ -54,12 +58,16 @@ export const FiltersSection: React.FC<FiltersProps> = observer(({ className }) =
     <div className={cn(styles.section, className)}>
       <div className={styles.section__search}>
         <Input value={inputVal} placeholder="Find an astronomical object" onChange={handleInputChange} 
+        afterSlot={<button className={styles["search-button"]} 
+          onClick={handleResetButtonClick}><CloseIcon 
+              color={inputVal === "" ? "secondary" : "accent"}
+              width={22} height={22} /></button>}
         onKeyDown={(e) => {
             if (e.key === 'Enter') {
-              handleButtonClick();
+              handleSearchButtonClick();
             }
           }} />
-        <Button disabled={inputVal === ""} onClick={handleButtonClick}>
+        <Button disabled={inputVal === ""} onClick={handleSearchButtonClick}>
           <Image src="/icons/search.svg" alt="Search Icon" width={24} height={24} />
         </Button>
       </div>

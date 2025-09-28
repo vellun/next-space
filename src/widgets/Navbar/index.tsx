@@ -1,12 +1,7 @@
-"use client"
-
 import { Text } from "@components/Text";
 import cn from "classnames";
 import Image from "next/image";
 import Link from "next/link";
-
-import { Button } from "@/shared/components/Button";
-import { saveAstroObjects } from "@/utils/addFirestoreData";
 
 import styles from "./Navbar.module.scss";
 
@@ -16,12 +11,7 @@ type NavbarProps = {
 };
 
 export const Navbar: React.FC<NavbarProps> = ({ className }) => {
-  const UpdateDB = () => {
-      saveAstroObjects()
-    }
-    
   return <div className={cn(styles.navbar, className)}>
-    <Button onClick={UpdateDB}>Update db (debug)</Button>
     <div className={styles.navbar__menu}>
       <Link href="/" className={styles.navbar__link1}>
         <Text tag="div" view="p-22" weight="medium" color="primary">

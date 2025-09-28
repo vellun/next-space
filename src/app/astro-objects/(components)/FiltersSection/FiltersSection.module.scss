@@ -16,6 +16,12 @@
   }
 }
 
+.search-button {
+  @include mixins.button-no-style;
+  background: transparent;
+  margin-top: 3px;
+}
+
 @include breakpoint(s) {
   .section {
     grid-template-columns: 1fr;

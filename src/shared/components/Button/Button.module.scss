@@ -3,11 +3,9 @@
 
 .button {
   @include mixins.flex-center-y;
+  @include mixins.button-no-style;
 
   justify-content: space-between;
-  cursor: pointer;
-  border: none;
-  outline: none;
   background-color: $brand;
   color: #ffff;
   padding: $space-s $space-l;

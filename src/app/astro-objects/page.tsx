@@ -4,9 +4,7 @@ import { Suspense } from "react";
 
 import Image from "next/image";
 
-import { Button } from "@/shared/components/Button";
 import { Loader } from "@/shared/components/Loader";
-import { saveAstroObjects } from "@/utils/addFirestoreData";
 import { Header } from "@/widgets/Header";
 
 import { CardsSection } from "./(components)/CardsSection";
@@ -15,9 +13,9 @@ import { ObjectsProvider } from "./(context)";
 import styles from "./page.module.scss";
 
 function AllObjectsContentPage() {
-  const UpdateDB = () => {
-    saveAstroObjects()
-  }
+  // const UpdateDB = () => {
+  //   saveAstroObjects()
+  // }
   
   return (
     <div>
@@ -34,7 +32,7 @@ function AllObjectsContentPage() {
         <CardsSection />
       </div>
       </ObjectsProvider>
-      <Button onClick={UpdateDB}>Update db (debug)</Button>
+      {/* <Button onClick={UpdateDB}>Update db (debug)</Button> */}
     </div>
   );
 };

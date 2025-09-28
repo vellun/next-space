@@ -49,10 +49,13 @@ export class FiltersStore {
     }
   }
 
-  setSearch(newSearch: string) {
+  setSearch(newSearch: string, reload = true) {
     if (this._search !== newSearch) {
       this._search = newSearch;
-      this._queryStore.updateQueryParams({ search: newSearch });
+
+      if (reload) {
+        this._queryStore.updateQueryParams({ search: newSearch });
+      }
     }
   }
 
@@ -62,6 +65,11 @@ export class FiltersStore {
 
   applySearch() {
     this.setSearch(this.inputValue || this._search || "")
+  }
+
+  resetSearch() {
+    this.setInputValue("")
+    this.setSearch("", false)
   }
 
   get search() {

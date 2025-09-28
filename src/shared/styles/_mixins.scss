@@ -14,3 +14,9 @@
   display: flex;
   align-items: center;
 }
+
+@mixin button-no-style() {
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
