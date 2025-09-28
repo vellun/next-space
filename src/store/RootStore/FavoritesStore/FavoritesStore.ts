@@ -1,4 +1,4 @@
-import { makeAutoObservable, reaction, runInAction } from 'mobx';
+import { makeObservable, observable, reaction, runInAction } from 'mobx';
 
 const KEY = 'favorites';
 
@@ -6,7 +6,9 @@ export class FavoritesStore {
   favoriteIds: string[] = [];
 
   constructor() {
-    makeAutoObservable(this);
+    makeObservable(this, {
+      favoriteIds: observable,
+    });
     this._loadFromStorage();
 
     reaction(

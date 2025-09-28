@@ -1,22 +1,30 @@
-import { makeAutoObservable } from "mobx";
+import { action, computed, makeObservable, observable } from "mobx";
 import type { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import qs from "qs";
 
 export class QueryParamsStore {
-  private _params: qs.ParsedQs = {};
-  private _search = "";
-  private _router: AppRouterInstance | null = null;
+  _params: qs.ParsedQs = {};
+  _search = "";
+  _router: AppRouterInstance | null = null;
 
   constructor() {
-    makeAutoObservable<QueryParamsStore>(this);
+    makeObservable<QueryParamsStore>(this, {
+      _params: observable,
+      _search: observable,
+      _router: observable,
+
+      setSearch: action,
+      setNavigate: action,
+      updateQueryParams: action,
+
+      search: computed,
+      navigate: computed,
+      apiObjectsParams: computed,
+    });
   }
 
   getParam(key: string): undefined | string | qs.ParsedQs | (string | qs.ParsedQs)[] {
     return this._params[key];
-  }
-
-  get search() {
-    return this._search;
   }
 
   setSearch(search: string) {
@@ -30,8 +38,20 @@ export class QueryParamsStore {
     this._router = router;
   }
 
+  get search() {
+    return this._search;
+  }
+
   get navigate() {
     return this._router;
+  }
+
+  get apiObjectsParams() {
+    return {
+      search: this.getParam("search") as string,
+      category: this.getParam("category") as string,
+      perPage: 3,
+    };
   }
 
   updateQueryParams = (params: Record<string, string | number | null | number[]>) => {
@@ -53,13 +73,5 @@ export class QueryParamsStore {
     const url = `${window.location.pathname}${`?${searchParams.toString()}`}`;
 
     this._router.replace(url, {scroll: false})
-  }
-
-  getApiObjectsParams() {
-    return {
-      search: this.getParam("search") as string,
-      category: this.getParam("filter") as string,
-      perPage: 3,
-    };
   }
 }

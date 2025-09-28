@@ -33,7 +33,7 @@ export class AllObjectsStore extends BaseStore {
 
     this.setMeta(Meta.loading);
 
-    const requestParams = this.query.getApiObjectsParams();
+    const requestParams = this.query.apiObjectsParams;
 
     const params: ObjectsApiRequestParams = {
       ...requestParams,

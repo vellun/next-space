@@ -1,29 +1,39 @@
 import type { QueryParamsStore } from "@store/RootStore/QueryParamsStore";
-import { makeAutoObservable, reaction } from "mobx";
+import { action, computed, makeObservable, observable, reaction } from "mobx";
 
 export class FiltersStore {
-  private _queryStore: QueryParamsStore;
-  private _filter: string;
-  private _search: string;
+  _queryStore: QueryParamsStore;
+  _category: string;
+  _search: string;
 
   inputValue: string | null = "";
 
   constructor(queryStore: QueryParamsStore) {
     this._queryStore = queryStore;
-    this._filter = "";
+    this._category = "";
     this._search = "";
     this.inputValue = "";
 
-    makeAutoObservable(this);
+    makeObservable(this, {
+      _category: observable,
+      _search: observable,
+      inputValue: observable,
+      setCategory: action,
+      setSearch: action,
+      setInputValue: action,
+      applySearch: action,
+      category: computed,
+      search: computed,
+    });
 
     reaction(
       () => ({
-        filter: this._queryStore.getParam("filter"),
+        category: this._queryStore.getParam("category"),
         search: this._queryStore.getParam("search"),
       }),
-      ({ filter, search }) => {
-        if (filter !== undefined) {
-          this._filter = filter as string;
+      ({ category, search }) => {
+        if (category !== undefined) {
+          this._category = category as string;
         }
         if (search !== undefined) {
           this._search = search as string;
@@ -32,10 +42,10 @@ export class FiltersStore {
     );
   }
 
-  setFilter(newFilter: string) {
-    if (this._filter !== newFilter) {
-      this._filter = newFilter;
-      this._queryStore.updateQueryParams({ filter: newFilter });
+  setCategory(newCategory: string) {
+    if (this._category !== newCategory) {
+      this._category = newCategory;
+      this._queryStore.updateQueryParams({ category: newCategory });
     }
   }
 
@@ -51,14 +61,14 @@ export class FiltersStore {
   }
 
   applySearch() {
-    this.setSearch(this.inputValue || "")
+    this.setSearch(this.inputValue || this._search || "")
   }
 
   get search() {
     return this._search;
   }
 
-  get filter() {
-    return this._filter;
+  get category() {
+    return this._category;
   }
 }

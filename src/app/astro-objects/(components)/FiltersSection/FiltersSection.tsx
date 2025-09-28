@@ -40,7 +40,7 @@ export const FiltersSection: React.FC<FiltersProps> = observer(({ className }) =
     const selectedType = selectedOptions.at(-1)?.key;
 
     if (selectedType) {
-      store.filters.setFilter(selectedType);
+      store.filters.setCategory(selectedType);
     }
   };
 
@@ -53,15 +53,20 @@ export const FiltersSection: React.FC<FiltersProps> = observer(({ className }) =
   return (
     <div className={cn(styles.section, className)}>
       <div className={styles.section__search}>
-        <Input value={inputVal} placeholder="Find an astronomical object" onChange={handleInputChange} />
-        <Button onClick={handleButtonClick}>
+        <Input value={inputVal} placeholder="Find an astronomical object" onChange={handleInputChange} 
+        onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              handleButtonClick();
+            }
+          }} />
+        <Button disabled={inputVal === ""} onClick={handleButtonClick}>
           <Image src="/icons/search.svg" alt="Search Icon" width={24} height={24} />
         </Button>
       </div>
       <MultiDropdown
         className={styles.section__filter}
         options={astroObjectsCategories}
-        value={store.filters.filter ? [{ key: store.filters.filter, value: store.filters.filter }] : []}
+        value={store.filters.category ? [{ key: store.filters.category, value: store.filters.category }] : []}
         onChange={handleSelect}
         getTitle={getTitle}
       />

@@ -7,7 +7,7 @@ export class AstroObject {
   description: string;
   imagePath: string;
   imageDetailPath: string;
-  info: Record<string, string>;
+  info: object;
   slug_reversed: string;
 
   constructor(
@@ -17,7 +17,7 @@ export class AstroObject {
     description: string,
     imagePath: string,
     imageDetailPath: string,
-    info: Record<string, string>,
+    info: object,
     slug_reversed: string,
   ) {
     this.name = name;
