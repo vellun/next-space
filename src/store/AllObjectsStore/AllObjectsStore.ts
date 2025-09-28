@@ -46,6 +46,7 @@ export class AllObjectsStore extends BaseStore {
 
     if (isError) {
       this.setMeta(Meta.error);
+      // console.log("ERRORRRRR", data)
       return;
     }
 

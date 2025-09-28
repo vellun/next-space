@@ -17,6 +17,7 @@ export const astroObjectConverter: FirestoreDataConverter<AstroObject> = {
       imagePath: object.imagePath,
       imageDetailPath: object.imageDetailPath,
       info: object.info,
+      slug_reversed: object.slug_reversed,
     };
   },
   fromFirestore: (snapshot: QueryDocumentSnapshot, options: SnapshotOptions): AstroObject => {
@@ -28,7 +29,8 @@ export const astroObjectConverter: FirestoreDataConverter<AstroObject> = {
       data.description,
       data.imagePath,
       data.imageDetailPath,
-      data.info
+      data.info,
+      data.slug_reversed,
     );
   },
 };

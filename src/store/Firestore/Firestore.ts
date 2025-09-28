@@ -6,8 +6,10 @@ import type {
   DocumentData,
   DocumentSnapshot,
   QueryConstraint,
-  QuerySnapshot} from "firebase/firestore";
+  QuerySnapshot
+} from "firebase/firestore";
 import {
+  and,
   collection,
   doc,
   getDocFromCache,
@@ -15,6 +17,7 @@ import {
   getDocsFromCache,
   getDocsFromServer,
   limit,
+  or,
   query,
   startAfter,
   where
@@ -29,18 +32,29 @@ class Firestore {
   ): Promise<QuerySnapshot> {
     const objectsRef = collection(db, "objects").withConverter(astroObjectConverter);
 
-    const constraints: QueryConstraint[] = []
     let objectsOuery = query(objectsRef)
-    if (params.search) {
-      const searchQuery = params.search.toLocaleLowerCase().split(" ").join("-")
+    const constraints = []
+    const andConstraints = []
 
-      constraints.push(where("slug", "==", searchQuery))
-      // Птом поиск лучше сделаю
-      // constraints.push(where('name', '>=', params.search), where('name', '<=', params.search + '\uf8ff'))
+    if (params.search) {
+      const orConstraints = []
+      
+      const searchQuery = params.search.toLocaleLowerCase().split(" ")
+
+      for (const word of searchQuery) {
+        orConstraints.push(and(where('slug', '>=', word), where('slug', '<=', word + '\uf8ff')))
+        orConstraints.push(and(where('slug_reversed', '>=', word.split('').reverse().join('')), 
+                          where('slug_reversed', '<=', word.split('').reverse().join('') + '\uf8ff')))
+      }
+
+      andConstraints.push(or(...orConstraints))
     }
+
     if (params.category !== undefined && params.category !== "all") {
-      constraints.push(where("category", "==", params.category))
+      andConstraints.push(where("category", "==", params.category))
     }
+
+    constraints.push(and(...andConstraints))
     
     if (params.perPage) {
       constraints.push(limit(params.perPage));
@@ -50,7 +64,7 @@ class Firestore {
       constraints.push(startAfter(params.startAfter));
     }
     
-    objectsOuery = query(objectsRef, ...constraints)
+    objectsOuery = query(objectsRef, ...constraints as QueryConstraint[])
 
     const querySnapshot =
       source === "server"

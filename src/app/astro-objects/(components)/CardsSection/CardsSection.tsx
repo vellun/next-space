@@ -39,7 +39,7 @@ export const CardsSection: React.FC = observer(() => {
     }
 
     if (objects.length === 0) {
-      return <div>Asto objects not found</div>;
+      return <div>Astro objects not found</div>;
     }
 
     return (
