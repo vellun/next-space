@@ -72,6 +72,9 @@
   .info-value {
     font-size: 20px;
   }
+  .page__description {
+    padding: $space-xl;
+  }
 }
 
 @include breakpoint(l) {
