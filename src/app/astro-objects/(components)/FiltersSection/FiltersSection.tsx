@@ -61,7 +61,7 @@ export const FiltersSection: React.FC<FiltersProps> = observer(({ className }) =
       <div className={styles.section__search}>
         <Input
           value={inputVal}
-          placeholder="Find an astronomical object"
+          placeholder="Find an astro object"
           onChange={handleInputChange}
           afterSlot={
             <button
