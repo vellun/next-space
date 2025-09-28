@@ -22,8 +22,8 @@
   margin-top: 3px;
 
   &:disabled {
-      cursor: default;
-    }
+    cursor: default;
+  }
 }
 
 @include breakpoint(s) {

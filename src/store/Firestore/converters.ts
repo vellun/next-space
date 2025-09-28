@@ -30,7 +30,7 @@ export const astroObjectConverter: FirestoreDataConverter<AstroObject> = {
       data.imagePath,
       data.imageDetailPath,
       data.info,
-      data.slug_reversed,
+      data.slug_reversed
     );
   },
 };

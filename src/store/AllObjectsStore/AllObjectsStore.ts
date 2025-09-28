@@ -17,8 +17,7 @@ export class AllObjectsStore extends BaseStore {
 
   constructor() {
     super();
-    makeObservable(this, { _astroObjects: observable, 
-      fetchNextPage: action.bound });
+    makeObservable(this, { _astroObjects: observable, fetchNextPage: action.bound });
   }
 
   async fetch() {
@@ -37,10 +36,10 @@ export class AllObjectsStore extends BaseStore {
 
     const params: ObjectsApiRequestParams = {
       ...requestParams,
-      search: requestParams.search || this.filters.inputValue as string,
+      search: requestParams.search || (this.filters.inputValue as string),
       perPage: this._perPage,
       startAfter: this._lastVisibleDoc,
-    }
+    };
 
     const { isError, data } = await firebaseStore.getAstroObjects(params);
 
@@ -52,10 +51,10 @@ export class AllObjectsStore extends BaseStore {
 
     runInAction(() => {
       this.meta = Meta.success;
-      const objects = data.docs.map(doc => doc.data());
+      const objects = data.docs.map((doc) => doc.data());
       const lastVisibleDoc = data.docs[data.docs.length - 1];
 
-      this._astroObjects.push(...objects as AstroObject[]);
+      this._astroObjects.push(...(objects as AstroObject[]));
       this._lastVisibleDoc = lastVisibleDoc;
       this.isEnd = objects.length < this._perPage;
     });

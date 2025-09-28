@@ -6,7 +6,7 @@ import type {
   DocumentData,
   DocumentSnapshot,
   QueryConstraint,
-  QuerySnapshot
+  QuerySnapshot,
 } from "firebase/firestore";
 import {
   and,
@@ -20,7 +20,7 @@ import {
   or,
   query,
   startAfter,
-  where
+  where,
 } from "firebase/firestore";
 
 import { astroObjectConverter } from "./converters";
@@ -32,46 +32,50 @@ class Firestore {
   ): Promise<QuerySnapshot> {
     const objectsRef = collection(db, "objects").withConverter(astroObjectConverter);
 
-    let objectsOuery = query(objectsRef)
-    const constraints = []
-    const andConstraints = []
+    let objectsOuery = query(objectsRef);
+    const constraints = [];
+    const andConstraints = [];
 
     if (params.search) {
-      const orConstraints = []
-      
-      const searchQuery = params.search.toLocaleLowerCase().split(" ")
+      const orConstraints = [];
+
+      const searchQuery = params.search.toLocaleLowerCase().split(" ");
 
       for (const word of searchQuery) {
-        orConstraints.push(and(where('slug', '>=', word), where('slug', '<=', word + '\uf8ff')))
-        orConstraints.push(and(where('slug_reversed', '>=', word.split('').reverse().join('')), 
-                          where('slug_reversed', '<=', word.split('').reverse().join('') + '\uf8ff')))
+        orConstraints.push(and(where("slug", ">=", word), where("slug", "<=", word + "\uf8ff")));
+        orConstraints.push(
+          and(
+            where("slug_reversed", ">=", word.split("").reverse().join("")),
+            where("slug_reversed", "<=", word.split("").reverse().join("") + "\uf8ff")
+          )
+        );
       }
 
-      andConstraints.push(or(...orConstraints))
+      andConstraints.push(or(...orConstraints));
     }
 
     if (params.category !== undefined && params.category !== "all") {
-      andConstraints.push(where("category", "==", params.category))
+      andConstraints.push(where("category", "==", params.category));
     }
 
-    constraints.push(and(...andConstraints))
-    
+    constraints.push(and(...andConstraints));
+
     if (params.perPage) {
       constraints.push(limit(params.perPage));
     }
-    
+
     if (params.startAfter) {
       constraints.push(startAfter(params.startAfter));
     }
-    
-    objectsOuery = query(objectsRef, ...constraints as QueryConstraint[])
+
+    objectsOuery = query(objectsRef, ...(constraints as QueryConstraint[]));
 
     const querySnapshot =
       source === "server"
         ? await getDocsFromServer(objectsOuery)
         : await getDocsFromCache(objectsOuery);
 
-    return querySnapshot
+    return querySnapshot;
   }
 
   private async _getObjectSnapshot(
@@ -81,14 +85,14 @@ class Firestore {
     const objectRef = doc(db, "objects", objectName).withConverter(astroObjectConverter);
 
     const querySnapshot =
-      source === "server"
-      ? await getDocFromServer(objectRef)
-      : await getDocFromCache(objectRef);
+      source === "server" ? await getDocFromServer(objectRef) : await getDocFromCache(objectRef);
 
-    return querySnapshot
+    return querySnapshot;
   }
 
-  async getAstroObjects(params: ObjectsApiRequestParams): Promise<ApiResp<QuerySnapshot<DocumentData, DocumentData>>> {
+  async getAstroObjects(
+    params: ObjectsApiRequestParams
+  ): Promise<ApiResp<QuerySnapshot<DocumentData, DocumentData>>> {
     try {
       const objects = await this._getObjectsSnapshot("server", params);
       return { isError: false, data: objects };
@@ -106,7 +110,7 @@ class Firestore {
   async getAstroObject(objectName: string): Promise<ApiResp<DocumentData>> {
     try {
       const objectSnap = await this._getObjectSnapshot("server", objectName);
-      
+
       return { isError: false, data: objectSnap };
     } catch (e) {
       if (e instanceof FirebaseError && e.code === "unavailable") {

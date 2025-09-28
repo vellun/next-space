@@ -1,2 +1,2 @@
-export {FavoritesStore} from "./FavoritesStore"
-export {favoritesStore} from "./instance"
+export { FavoritesStore } from "./FavoritesStore";
+export { favoritesStore } from "./instance";

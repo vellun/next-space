@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useCallback } from "react";
 
@@ -16,7 +16,6 @@ import { useAllObjectsPageStore } from "../../(context)";
 
 import styles from "./FiltersSection.module.scss";
 
-
 type FiltersProps = {
   className?: string;
 };
@@ -25,19 +24,19 @@ export const FiltersSection: React.FC<FiltersProps> = observer(({ className }) =
   const store = useAllObjectsPageStore();
 
   if (store === undefined) {
-      return;
-    }
-  
+    return;
+  }
+
   const handleInputChange = (value: string) => {
     store.filters.setInputValue(value);
   };
 
   const handleSearchButtonClick = () => {
-    store.filters.applySearch(); 
+    store.filters.applySearch();
   };
 
   const handleResetButtonClick = () => {
-    store.filters.resetSearch(); 
+    store.filters.resetSearch();
   };
 
   const handleSelect = (selectedOptions: Option[]) => {
@@ -49,25 +48,36 @@ export const FiltersSection: React.FC<FiltersProps> = observer(({ className }) =
   };
 
   const getTitle = useCallback((values: Option[]) => {
-    return values.length === 0 ? "Select object category" : values.map(({ value }) => value).join(", ");
+    return values.length === 0
+      ? "Select object category"
+      : values.map(({ value }) => value).join(", ");
   }, []);
 
-  const inputVal = store.filters.inputValue !== null ? store.filters.inputValue : store.filters.search
+  const inputVal =
+    store.filters.inputValue !== null ? store.filters.inputValue : store.filters.search;
 
   return (
     <div className={cn(styles.section, className)}>
       <div className={styles.section__search}>
-        <Input value={inputVal} placeholder="Find an astronomical object" onChange={handleInputChange} 
-        afterSlot={<button className={styles["search-button"]} disabled={inputVal === ""}
-          onClick={handleResetButtonClick}><CloseIcon 
-              color={inputVal === "" ? "secondary" : "accent"}
-              width={22} height={22}
-              /></button>}
-        onKeyDown={(e) => {
-            if (e.key === 'Enter') {
+        <Input
+          value={inputVal}
+          placeholder="Find an astronomical object"
+          onChange={handleInputChange}
+          afterSlot={
+            <button
+              className={styles["search-button"]}
+              disabled={inputVal === ""}
+              onClick={handleResetButtonClick}
+            >
+              <CloseIcon color={inputVal === "" ? "secondary" : "accent"} width={22} height={22} />
+            </button>
+          }
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
               handleSearchButtonClick();
             }
-          }} />
+          }}
+        />
         <Button disabled={inputVal === ""} onClick={handleSearchButtonClick}>
           <Image src="/icons/search.svg" alt="Search Icon" width={24} height={24} />
         </Button>
@@ -75,7 +85,11 @@ export const FiltersSection: React.FC<FiltersProps> = observer(({ className }) =
       <MultiDropdown
         className={styles.section__filter}
         options={astroObjectsCategories}
-        value={store.filters.category ? [{ key: store.filters.category, value: store.filters.category }] : []}
+        value={
+          store.filters.category
+            ? [{ key: store.filters.category, value: store.filters.category }]
+            : []
+        }
         onChange={handleSelect}
         getTitle={getTitle}
       />

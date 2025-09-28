@@ -18,7 +18,7 @@ export class AstroObject {
     imagePath: string,
     imageDetailPath: string,
     info: object,
-    slug_reversed: string,
+    slug_reversed: string
   ) {
     this.name = name;
     this.slug = slug;

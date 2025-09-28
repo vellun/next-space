@@ -11,8 +11,7 @@ const objects = [
     slug: "the-sun",
     name: "The Sun",
     category: "star",
-    description:
-      `The Sun is the star at the centre of the Solar System. 
+    description: `The Sun is the star at the centre of the Solar System. 
       It is a massive, nearly perfect sphere of hot plasma, 
       heated to incandescence by nuclear fusion reactions in its core, 
       radiating the energy from its surface mainly as visible light and infrared 
@@ -237,7 +236,7 @@ export async function saveAstroObjects(): Promise<void> {
       object.imagePath,
       object.imageDetailPath,
       object.info,
-      object.slug.split('').reverse().join(''),
+      object.slug.split("").reverse().join("")
     );
     const objectRef = doc(db, "objects", newObject.slug).withConverter(astroObjectConverter);
     await setDoc(objectRef, newObject);

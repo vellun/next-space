@@ -7,4 +7,3 @@ export type ApiResp<SuccessData = unknown, ErrorData = unknown> =
       isError: true;
       data: ErrorData;
     };
-

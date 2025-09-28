@@ -5,7 +5,6 @@ import { Container } from "@/widgets/Container";
 
 import "@styles/styles.scss";
 
-
 export const metadata: Metadata = {
   title: "Space",
   description: "Astro objects catalog",

@@ -9,14 +9,7 @@ import prettierConfig from "eslint-config-prettier";
 
 export default tseslint.config(
   {
-    ignores: [
-      "**/dist",
-      "**/build",
-      "**/.next",
-      "**/public",
-      "**/*.cjs",
-      "**/node_modules",
-    ],
+    ignores: ["**/dist", "**/build", "**/.next", "**/public", "**/*.cjs", "**/node_modules"],
   },
 
   eslint.configs.recommended,
@@ -79,15 +72,7 @@ export default tseslint.config(
       "import/order": [
         "error",
         {
-          groups: [
-            "builtin",
-            "external",
-            "internal",
-            "object",
-            "parent",
-            "sibling",
-            "index",
-          ],
+          groups: ["builtin", "external", "internal", "object", "parent", "sibling", "index"],
           alphabetize: { order: "asc" },
           "newlines-between": "always",
           pathGroups: [

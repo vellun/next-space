@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React from "react";
 
@@ -13,7 +13,6 @@ import { useObjectPageStore } from "../../(context)";
 
 import styles from "./ObjectInfo.module.scss";
 
-
 const ObjectInfo = () => {
   const store = useObjectPageStore();
 
@@ -22,9 +21,9 @@ const ObjectInfo = () => {
   }
 
   if (store.meta === Meta.loading) {
-    return <Loader size="xl"/>;
+    return <Loader size="xl" />;
   }
-  
+
   if (store.meta === Meta.error) {
     return <div>An error occured</div>;
   }
@@ -32,7 +31,7 @@ const ObjectInfo = () => {
   const object = store.object;
 
   if (!object) {
-    notFound()
+    notFound();
   }
 
   return (
@@ -83,4 +82,4 @@ const ObjectInfo = () => {
   );
 };
 
-export default observer(ObjectInfo)
+export default observer(ObjectInfo);

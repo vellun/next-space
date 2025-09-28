@@ -1,5 +1,10 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, initializeFirestore, persistentLocalCache, persistentMultipleTabManager } from "firebase/firestore";
+import {
+  getFirestore,
+  initializeFirestore,
+  persistentLocalCache,
+  persistentMultipleTabManager,
+} from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCwOd7PX6An7WhgskfnMRlKqSpfW2vLkLw",
@@ -11,9 +16,8 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-initializeFirestore(app, 
-  {localCache: 
-    persistentLocalCache({tabManager: persistentMultipleTabManager()})
-  });
+initializeFirestore(app, {
+  localCache: persistentLocalCache({ tabManager: persistentMultipleTabManager() }),
+});
 const db = getFirestore(app);
 export { db };

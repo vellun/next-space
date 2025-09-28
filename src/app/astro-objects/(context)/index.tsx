@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { createContext, useContext, useEffect } from "react";
 
@@ -22,7 +22,7 @@ const StoreInitializer = ({ store }: { store: AllObjectsStore }) => {
 
   useEffect(() => {
     store.query.setSearch(search.toString());
-    store.query.setNavigate(navigate); 
+    store.query.setNavigate(navigate);
   }, [store, search, navigate]);
 
   return null;
@@ -30,8 +30,10 @@ const StoreInitializer = ({ store }: { store: AllObjectsStore }) => {
 
 export const ObjectsProvider = ({ children }: { children: React.ReactNode }) => {
   const store = new AllObjectsStore();
-  return <ObjectsContext.Provider value={{ store }}>
+  return (
+    <ObjectsContext.Provider value={{ store }}>
       <StoreInitializer store={store} />
       {children}
     </ObjectsContext.Provider>
+  );
 };

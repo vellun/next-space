@@ -56,7 +56,7 @@ export class QueryParamsStore {
 
   updateQueryParams = (params: Record<string, string | number | null | number[]>) => {
     if (!this._router) {
-      return
+      return;
     }
 
     const searchParams = new URLSearchParams(window.location.search.split("?")[1] || "");
@@ -72,6 +72,6 @@ export class QueryParamsStore {
 
     const url = `${window.location.pathname}${`?${searchParams.toString()}`}`;
 
-    this._router.replace(url, {scroll: false})
-  }
+    this._router.replace(url, { scroll: false });
+  };
 }

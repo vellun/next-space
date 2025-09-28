@@ -1,11 +1,13 @@
-"use client"
+"use client";
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect } from "react";
 
-export const useInfiniteScroll = (onFetch: () => void,
+export const useInfiniteScroll = (
+  onFetch: () => void,
   isLoading: boolean,
   isEnd: boolean,
-  options?: IntersectionObserverInit) => {
+  options?: IntersectionObserverInit
+) => {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -15,15 +17,12 @@ export const useInfiniteScroll = (onFetch: () => void,
 
     const element = ref.current;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const first = entries[0];
-        if (first.isIntersecting) {
-          onFetch();
-        }
-      },
-      options
-    );
+    const observer = new IntersectionObserver((entries) => {
+      const first = entries[0];
+      if (first.isIntersecting) {
+        onFetch();
+      }
+    }, options);
 
     if (element) {
       observer.observe(element);

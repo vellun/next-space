@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
 import React, { useEffect, useRef, useState } from "react";
 
-import {Text} from "@components/Text"
+import { Text } from "@components/Text";
 import { ArrowDownIcon } from "@components/icons/ArrowDownIcon";
 import classNames from "classnames";
 
@@ -64,14 +64,14 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = (props: MultiDropdown
       const isSelected = value.map((v) => v.key).includes(option.key);
 
       const handleMenuClick = (e: React.MouseEvent | React.KeyboardEvent) => {
-          e.stopPropagation();
-          if (isSelected) {
-            onChange(value.filter((v) => v.key !== option.key));
-          } else {
-            onChange([...value, option]);
-          }
-          setIsOpen(false);
+        e.stopPropagation();
+        if (isSelected) {
+          onChange(value.filter((v) => v.key !== option.key));
+        } else {
+          onChange([...value, option]);
         }
+        setIsOpen(false);
+      };
 
       return (
         <div
@@ -84,12 +84,14 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = (props: MultiDropdown
           role="button"
           tabIndex={0}
           onKeyDown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
+            if (e.key === "Enter" || e.key === " ") {
               handleMenuClick(e);
             }
           }}
         >
-          <Text className={styles["dropdown__category-menu__item-text"]} view="p-18" tag="div">{option.value}</Text>
+          <Text className={styles["dropdown__category-menu__item-text"]} view="p-18" tag="div">
+            {option.value}
+          </Text>
         </div>
       );
     });

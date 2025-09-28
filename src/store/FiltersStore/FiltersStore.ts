@@ -64,12 +64,12 @@ export class FiltersStore {
   }
 
   applySearch() {
-    this.setSearch(this.inputValue || this._search || "")
+    this.setSearch(this.inputValue || this._search || "");
   }
 
   resetSearch() {
-    this.setInputValue("")
-    this.setSearch("", false)
+    this.setInputValue("");
+    this.setSearch("", false);
   }
 
   get search() {

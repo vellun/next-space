@@ -1,6 +1,6 @@
-import { makeObservable, observable, reaction, runInAction } from 'mobx';
+import { makeObservable, observable, reaction, runInAction } from "mobx";
 
-const KEY = 'favorites';
+const KEY = "favorites";
 
 export class FavoritesStore {
   favoriteIds: string[] = [];
@@ -21,7 +21,7 @@ export class FavoritesStore {
 
   toggleFavorite = (objectId: string) => {
     if (this.isFavorite(objectId)) {
-      this.favoriteIds = this.favoriteIds.filter(id => id !== objectId);
+      this.favoriteIds = this.favoriteIds.filter((id) => id !== objectId);
     } else {
       this.favoriteIds.push(objectId);
     }
@@ -32,13 +32,13 @@ export class FavoritesStore {
   };
 
   private _saveToStorage(ids: string[]) {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       localStorage.setItem(KEY, JSON.stringify(ids));
     }
   }
 
   private _loadFromStorage() {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       const storedFavorites = localStorage.getItem(KEY);
 
       if (storedFavorites) {

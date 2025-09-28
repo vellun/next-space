@@ -9,7 +9,7 @@ export abstract class BaseStore {
   meta: Meta = Meta.initial;
   error: string | null = null;
 
-  private _isInitialized = false
+  private _isInitialized = false;
 
   constructor() {
     this.query = new QueryParamsStore();
@@ -40,13 +40,13 @@ export abstract class BaseStore {
         search: this.query.getParam("search"),
       }),
       (current, previous) => {
-      if (
-        this._isInitialized &&
-        (current.category !== previous.category || current.search !== previous.search)
-      ) {
-        this.fetch();
+        if (
+          this._isInitialized &&
+          (current.category !== previous.category || current.search !== previous.search)
+        ) {
+          this.fetch();
+        }
       }
-    },
     );
   }
 

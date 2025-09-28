@@ -1,4 +1,4 @@
-"use client" // TODO: Убрать вмете с кнопкой для обновления бд
+"use client"; // TODO: Убрать вмете с кнопкой для обновления бд
 
 import { Suspense } from "react";
 
@@ -16,26 +16,29 @@ function AllObjectsContentPage() {
   // const UpdateDB = () => {
   //   saveAstroObjects()
   // }
-  
+
   return (
     <div>
       <Header className={styles.page__header} />
       <ObjectsProvider>
-      <div className={styles.page}>
-        <div className={styles["page__filters-section"]}>
-          <Image width={1200} height={140} 
-            className={styles.page__line} 
-            src="/icons/filter-section-line.svg"
-            alt="Line element" />
-          <FiltersSection className={styles.page__filters}/>
+        <div className={styles.page}>
+          <div className={styles["page__filters-section"]}>
+            <Image
+              width={1200}
+              height={140}
+              className={styles.page__line}
+              src="/icons/filter-section-line.svg"
+              alt="Line element"
+            />
+            <FiltersSection className={styles.page__filters} />
+          </div>
+          <CardsSection />
         </div>
-        <CardsSection />
-      </div>
       </ObjectsProvider>
       {/* <Button onClick={UpdateDB}>Update db (debug)</Button> */}
     </div>
   );
-};
+}
 
 export default function AllObjectsPage() {
   return (

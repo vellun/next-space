@@ -40,29 +40,36 @@ export const Card: React.FC<CardProps> = ({
       <div className={styles.card__body}>
         <div className={styles.card__caption}>
           <div className={styles["card__caption-title"]}>
-          <Text
-            className={cn(styles.card__text, styles.card__title)}
-            weight="medium"
-            view="p-20"
-            color="primary"
-            maxLines={2}
-          >
-            {title}
-          </Text>
-          {captionSlot && (
             <Text
-              className={cn(styles.card__text, styles["card__caption-slot"])}
+              className={cn(styles.card__text, styles.card__title)}
               weight="medium"
-              view="p-18"
-              color="semi"
-              tag="div"
+              view="p-20"
+              color="primary"
+              maxLines={2}
             >
-              {captionSlot}
+              {title}
             </Text>
-          )}</div>
+            {captionSlot && (
+              <Text
+                className={cn(styles.card__text, styles["card__caption-slot"])}
+                weight="medium"
+                view="p-18"
+                color="semi"
+                tag="div"
+              >
+                {captionSlot}
+              </Text>
+            )}
+          </div>
           {captionButton}
         </div>
-        <Image className={styles.card__image} width={310} height={275} src={image} alt="Card image" />
+        <Image
+          className={styles.card__image}
+          width={310}
+          height={275}
+          src={image}
+          alt="Card image"
+        />
 
         <Text weight="normal" view="p-18" color="primary" maxLines={3}>
           {subtitle}
