@@ -20,6 +20,10 @@
   @include mixins.button-no-style;
   background: transparent;
   margin-top: 3px;
+
+  &:disabled {
+      cursor: default;
+    }
 }
 
 @include breakpoint(s) {

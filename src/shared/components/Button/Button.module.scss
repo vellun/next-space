@@ -30,10 +30,11 @@
   }
 
   &:disabled {
-    background-color: #d9d9d9;
+    background-color: $brand-disabled;
+    cursor: default;
 
     &:hover {
-      background-color: #d9d9d9;
+      background-color: $brand-disabled;
     }
   }
 }

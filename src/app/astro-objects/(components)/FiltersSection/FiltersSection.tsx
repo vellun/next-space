@@ -58,10 +58,11 @@ export const FiltersSection: React.FC<FiltersProps> = observer(({ className }) =
     <div className={cn(styles.section, className)}>
       <div className={styles.section__search}>
         <Input value={inputVal} placeholder="Find an astronomical object" onChange={handleInputChange} 
-        afterSlot={<button className={styles["search-button"]} 
+        afterSlot={<button className={styles["search-button"]} disabled={inputVal === ""}
           onClick={handleResetButtonClick}><CloseIcon 
               color={inputVal === "" ? "secondary" : "accent"}
-              width={22} height={22} /></button>}
+              width={22} height={22}
+              /></button>}
         onKeyDown={(e) => {
             if (e.key === 'Enter') {
               handleSearchButtonClick();
