@@ -1,0 +1,1 @@
+export { AstroObject } from "./astroObject";

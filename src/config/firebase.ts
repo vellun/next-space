@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
 import {
   getFirestore,
   initializeFirestore,
@@ -20,4 +21,6 @@ initializeFirestore(app, {
   localCache: persistentLocalCache({ tabManager: persistentMultipleTabManager() }),
 });
 const db = getFirestore(app);
-export { db };
+const auth = getAuth(app);
+
+export { db, auth };

@@ -1,5 +1,5 @@
 import { firebaseStore } from "@store/Firestore";
-import type { AstroObject } from "@store/Firestore/models";
+import type { AstroObject } from "@/store/Firestore/astroObject";
 import { Meta } from "@utils/meta";
 import { action, makeObservable, observable, runInAction } from "mobx";
 
