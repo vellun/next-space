@@ -11,4 +11,16 @@ export const routesConfig = {
     mask: "/astro-objects/:objectName",
     create: (objectName: string) => `/astro-objects/${objectName}`,
   },
+  login: {
+    mask: "/login",
+    create: () => "/login",
+  },
+  register: {
+    mask: "/register",
+    create: () => "/register",
+  },
+  favorites: {
+    mask: "/astro-objects/favorites",
+    create: () => "/astro-objects/favorites",
+  },
 };

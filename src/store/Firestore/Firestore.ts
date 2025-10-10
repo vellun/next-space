@@ -12,6 +12,7 @@ import {
   and,
   collection,
   doc,
+  getDoc,
   getDocFromCache,
   getDocFromServer,
   getDocsFromCache,
@@ -19,11 +20,13 @@ import {
   limit,
   or,
   query,
+  setDoc,
   startAfter,
   where,
 } from "firebase/firestore";
 
 import { astroObjectConverter } from "./converters";
+import { AstroObject } from "./models";
 
 class Firestore {
   private async _getObjectsSnapshot(
@@ -120,6 +123,50 @@ class Firestore {
         }
       }
       return { isError: true, data: e };
+    }
+  }
+
+  async getAstroObjectsByIds(objectNames: string[]): Promise<ApiResp<AstroObject[]>> {
+    if (objectNames.length === 0) {
+      return { isError: false, data: [] };
+    }
+
+    const objectsRef = collection(db, "objects").withConverter(astroObjectConverter);
+
+    try {
+      const objectsQuery = query(objectsRef, where("__name__", "in", objectNames));
+      const querySnapshot = await getDocsFromServer(objectsQuery);
+
+      const objects = querySnapshot.docs.map(doc => doc.data());
+
+      return { isError: false, data: objects };
+    } catch (e) {
+      console.error("Failed to fetch favorites objects by IDs:", e);
+      return { isError: true, data: e };
+    }
+  }
+
+  async getUserFavorites(userId: string): Promise<string[]> {
+    const docRef = doc(db, "userFavorites", userId);
+    try {
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        return Array.isArray(data.favorites) ? (data.favorites as string[]) : [];
+      }
+      return [];
+    } catch (e) {
+      console.error("Failed to fetch user favorites:", e);
+      return [];
+    }
+  }
+
+  async updateUserFavorites(userId: string, favorites: string[]): Promise<void> {
+    const docRef = doc(db, "userFavorites", userId);
+    try {
+      await setDoc(docRef, { favorites: favorites }, { merge: true });
+    } catch (e) {
+      console.error("Failed to update user favorites:", e);
     }
   }
 }

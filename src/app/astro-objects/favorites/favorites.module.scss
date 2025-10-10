@@ -1,0 +1,46 @@
+@use "@styles/variables" as *;
+@use "@styles/adaptive" as *;
+
+.page {
+    margin-left: 7%;
+    margin-right: 7%;
+    margin-top: $elements-margin;
+}
+
+.title {
+    margin-bottom: $elements-margin;
+    text-align: center;
+}
+
+.section {
+    display: grid;
+    grid-template-columns: repeat(3, 360px);
+    gap: $elements-margin;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.fav-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.centered {
+    text-align: center;
+    margin-top: 50px;
+}
+
+
+@include breakpoint(xl) {
+    .section {
+        grid-template-columns: repeat(2, 360px);
+    }
+}
+
+@include breakpoint(m) {
+    .section {
+        grid-template-columns: 360px;
+    }
+}

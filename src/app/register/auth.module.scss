@@ -1,0 +1,13 @@
+@use "@styles/variables" as *;
+
+.authPage {
+    display: flex;
+    flex-direction: column;
+    gap: $space-l;
+    max-width: 400px;
+    margin: 100px auto;
+    padding: $space-xl;
+    background-color: white;
+    border-radius: $border-radius;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}

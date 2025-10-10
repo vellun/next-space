@@ -1,0 +1,1 @@
+export { FavoriteObjectsStore } from "./FavoriteObjectsStore";
