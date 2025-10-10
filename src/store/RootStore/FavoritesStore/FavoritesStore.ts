@@ -1,3 +1,5 @@
+"use client"
+
 import { makeObservable, observable, reaction, runInAction } from "mobx";
 
 const KEY = "favorites";

@@ -1,0 +1,23 @@
+@use "@styles/variables" as *;
+@use "@styles/adaptive" as *;
+
+.page-container {
+    margin-left: 7%;
+    margin-right: 7%;
+    padding-top: $elements-margin; 
+
+    @include breakpoint(xxl) {
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+}
+
+.title {
+    text-align: center;
+    margin-bottom: $elements-margin;
+}
+
+.empty-message {
+    text-align: center;
+    padding: 40px;
+}

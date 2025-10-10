@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import styles from "./Navbar.module.scss";
+import { routesConfig } from "@/config";
 
 type NavbarProps = {
   className?: string;
@@ -27,9 +28,9 @@ export const Navbar: React.FC<NavbarProps> = ({ className }) => {
             alt="Space Logo"
           />
         </Link>
-        <Link href="/" className={styles.navbar__link2}>
+        <Link href={routesConfig.favorites.create()} className={styles.navbar__link2}>
           <Text tag="div" view="p-22" weight="medium" color="primary">
-            categories
+            favorites
           </Text>
         </Link>
       </div>
